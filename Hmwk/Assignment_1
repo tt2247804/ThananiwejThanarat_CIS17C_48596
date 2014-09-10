@@ -1,0 +1,179 @@
+/* 
+ * File:   Assignment_1.cpp
+ * Author: Thanarat Thananiwej
+ * Created on September 7, 2014, 9:00 PM
+ * Purpose:  Create a templated class for the triangular matrix code running intergers and floats
+ */
+
+//System Libraries
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
+using namespace std;
+
+//Global Constants
+
+//Templated Class
+template <class T>
+class TriMat
+{
+public:
+	//Variables
+	T rows, cols, cls, perLine;
+	T **array;
+	T *colAry;
+	T **triAry;
+	//Functions Prototypes
+	T*  fillArray(T);
+	T** fillArray(T,T);
+	T** fillArray(T,T*);
+	void printArray(T*,T,T);
+	void printArray(T**,T,T);
+	void printArray(T**,T,T *);
+	void destroy(T *);
+	void destroy(T **,T);
+};
+
+//Execution Begins Here
+int main(int argc, char** argv) {
+    //Initialize the random number generator
+    srand(static_cast<unsigned int>(time(0)));
+    //Declare the 2-D Array
+	//Running integers
+	cout << "Integers Triangular Matrix" << endl;
+	TriMat<int> tmi;
+    tmi.rows=5,tmi.cols=10;
+    tmi.cls=tmi.rows,tmi.perLine=10;
+    tmi.array=tmi.fillArray(tmi.rows,tmi.cols);
+    tmi.colAry=tmi.fillArray(tmi.cls);
+    tmi.triAry=tmi.fillArray(tmi.rows,tmi.colAry);
+    //Print the array
+    tmi.printArray(tmi.array,tmi.rows,tmi.cols);
+    tmi.printArray(tmi.colAry,tmi.cls,tmi.perLine);
+    tmi.printArray(tmi.triAry,tmi.rows,tmi.colAry);
+    //Delete the array
+    tmi.destroy(tmi.array,tmi.rows);
+    tmi.destroy(tmi.triAry,tmi.rows);
+    tmi.destroy(tmi.colAry);
+
+	//Declare the 2-D Array
+	//Running float
+	cout << endl;
+	cout << "Floats Triangular Matrix" << endl;
+	TriMat<float> tmf;
+    tmf.rows=5,tmf.cols=10;
+    tmf.cls=tmf.rows,tmf.perLine=10;
+    tmf.array=tmf.fillArray(tmf.rows,tmf.cols);
+    tmf.colAry=tmf.fillArray(tmf.cls);
+    tmf.triAry=tmf.fillArray(tmf.rows,tmf.colAry);
+    //Print the array
+    tmf.printArray(tmf.array,tmf.rows,tmf.cols);
+    tmf.printArray(tmf.colAry,tmf.cls,tmf.perLine);
+    tmf.printArray(tmf.triAry,tmf.rows,tmf.colAry);
+    //Delete the array
+    tmf.destroy(tmf.array,tmf.rows);
+    tmf.destroy(tmf.triAry,tmf.rows);
+    tmf.destroy(tmf.colAry);
+
+    //Exit stage right
+    return 0;
+}
+
+//Templated Functions
+template <class T>
+void TriMat<T>::destroy(T *array){
+    //Destroy row pointers
+    delete []array;
+}
+
+template <class T>
+void TriMat<T>::destroy(T **array,T rows){
+    //Destroy cols
+    for(int row=0;row<rows;row++){
+        delete []array[row];
+    }
+    //Destroy row pointers
+    delete []array;
+}
+
+template <class T>
+void TriMat<T>::printArray(T*array,T cols,T perLine){
+    //Print the Array
+    cout<<endl;
+    for(int col=0;col<cols;col++){
+       cout<<array[col]<<" ";
+       if(static_cast<int>(col)%static_cast<int>(perLine)==(perLine-1))cout<<endl; 
+    }
+    cout<<endl;
+}
+
+template <class T>
+void TriMat<T>::printArray(T**array,T rows,T *colAry){
+    //Print the Array
+    cout<<endl;
+    for(int row=0;row<rows;row++){
+        for(int col=0;col<colAry[row];col++){
+            cout<<array[row][col]<<" ";
+        }
+        cout<<endl;
+    }
+    cout<<endl;
+}
+
+template <class T>
+void TriMat<T>::printArray(T**array,T rows,T cols){
+    //Print the Array
+    cout<<endl;
+    for(int row=0;row<rows;row++){
+        for(int col=0;col<cols;col++){
+            cout<<array[row][col]<<" ";
+        }
+        cout<<endl;
+    }
+    cout<<endl;
+}
+
+template <class T>
+T* TriMat<T>::fillArray(T cols){
+    //Declare the 1-D Array
+    T * array=new T[static_cast<int>(cols)];
+    //Fill the array with random 2 digit numbers
+    for(int col=0;col<cols;col++){
+        array[col]=static_cast<float>(rand()%9+2);
+    }
+    return array;
+}
+
+template <class T>
+T** TriMat<T>::fillArray(T rows,T *colAry){
+    //Declare the 2-D Array
+    T ** array=new T*[static_cast<int>(rows)];
+    for(int row=0;row<rows;row++){
+        //cout<<"Number of Cols = "<<colAry[row]<<endl;
+        array[row]=new T[static_cast<int>(colAry[row])];
+    }
+    //Fill the array with random 2 digit numbers
+    for(int row=0;row<rows;row++){
+        for(int col=0;col<colAry[row];col++){
+            array[row][col]=static_cast<float>(rand()%90+10);
+            //cout<<"Row Col"<<row<<" "<<col<<endl;
+        }
+    }
+    return array;
+}
+
+template <class T>
+T** TriMat<T>::fillArray(T rows,T cols){
+    //Declare the 2-D Array
+    T ** array=new T*[static_cast<int>(rows)];
+    for(int row=0;row<rows;row++){
+        array[row]=new T[static_cast<int>(cols)];
+    }
+    //Fill the array with random 2 digit numbers
+    for(int row=0;row<rows;row++){
+        for(int col=0;col<cols;col++){
+            array[row][col]=static_cast<float>(rand()%90+10);
+        }
+    }
+    return array;
+}
