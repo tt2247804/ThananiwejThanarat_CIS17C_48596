@@ -1,0 +1,35 @@
+Thanarat Thananiwej
+CIS 17C
+11-11-2014
+
+Electronic Menu
+  Many restaurants today are busy, so waiters are slow in taking customer’s orders. 
+To reduce this problem, I decide to create a program using Visual Studio that can help the employees. 
+This program will provide a menu to the customers and take their orders without needing the waiters. 
+It fasten the process of ordering food and beverages. This project is called electronic menu.
+  This program utilizes STL library including maps, sets, stacks, queues, iterators, and algorithms. 
+Maps are used to store the name and price of the food. Sets are used to calculate the subtotal costs. 
+Stacks are used to restart the order process. Queues are used to store the users order. 
+Iterators are used to print out the menu. And algorithms are used to sort the menu. 
+The program is divided into two sections: menu mode and order mode. 
+  In the menu mode, the program will display an actual restaurant menu for the users. 
+It lists food along with the prices. 
+Users can also look up the ingredients on the description of the food they would like to know.
+  In the order mode, users are able to choose items they would like to order from the mini menu. 
+The procedure starts from ordering the beverages, food, and then desserts in this particular order. 
+Once they finished the ordering procedure, the program will then prompt the users if their orders are correct, 
+and if yes (type y) the program will automatically calculate the total price including the taxes. 
+If no (type n), the users can change their orders and rerun the same procedures of the order mode again.
+
+
+Functional features
+Menu mode
+  Display menu
+  List food with prices
+  Provide description and ingredient of the food
+Order mode
+  Display mini menu
+  Select orders from the list
+  Calculate prices and taxes
+  Ensure the correction
+  Show total costs
